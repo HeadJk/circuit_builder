@@ -1,11 +1,8 @@
 package com.circuit_designer;
 
-import com.circuit_designer.unit.*;
-import com.circuit_designer.unit.prefix.PrefixInterface;
 import com.circuit_designer.unit.time.*;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.Assertions;
 
 public class UnitTest {
 
