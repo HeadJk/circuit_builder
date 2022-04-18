@@ -12,8 +12,8 @@ public interface BusInterface {
 
     public void detatchObserver(SignalObserver o);
 
-    public Bit getSignal();
+    public Signal getSignal();
 
-    public void setSignal(Bit bit);
+    public void setSignal(Signal bit);
 
 }

@@ -79,7 +79,7 @@
         </configuration>
         <executions>
           <execution>
-            <id>checkstyle</id>
+            <id>checkstyle-validation</id>
             <phase>none</phase>
             <goals>
               <goal>check</goal>

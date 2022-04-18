@@ -3,8 +3,10 @@ package com.circuit_designer.circuitStructure;
 import java.util.List;
 import java.util.ArrayList;
 
+// TODO Unit test.
+
 public abstract class SignalSubject {
-    List<SignalObserver> observers;
+    private List<SignalObserver> observers;
 
     public SignalSubject() {
         this.observers = new ArrayList<SignalObserver>();
@@ -20,6 +22,6 @@ public abstract class SignalSubject {
 
     public void notifyObservers() {
         for(SignalObserver o : this.observers)
-            o.updateOutput();
+            o.updateOutputs();
     }
 }

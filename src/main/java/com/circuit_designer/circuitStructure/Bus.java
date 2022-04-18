@@ -3,7 +3,7 @@ package com.circuit_designer.circuitStructure;
 public class Bus extends SignalSubject implements BusInterface {
 
     private boolean isAvailableInput = true;
-    private Bit signalBit = Bit.UNKNOWN;
+    private Signal signalBit = Signal.UNKNOWN;
 
     @Override
     public void attatchObserver(SignalObserver o) {
@@ -31,12 +31,12 @@ public class Bus extends SignalSubject implements BusInterface {
     }
 
     @Override
-    public Bit getSignal() {
+    public Signal getSignal() {
         return this.signalBit;
     }
 
     @Override
-    public void setSignal(Bit bit) {
+    public void setSignal(Signal bit) {
         this.signalBit = bit;
         notifyObservers();
     }

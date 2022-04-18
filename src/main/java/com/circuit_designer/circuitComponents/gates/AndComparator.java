@@ -1,21 +1,23 @@
 package com.circuit_designer.circuitComponents.gates;
 
-import com.circuit_designer.circuitStructure.Bit;
+import com.circuit_designer.circuitStructure.Signal;
+
+// TODO Unit test.
 
 public class AndComparator implements BitComparator {
 
     @Override
-    public Bit compare(Bit b1, Bit b2) {
+    public Signal compare(Signal b1, Signal b2) {
 
-        if(b1 == Bit.LOW || b2 == Bit.LOW) {
-            return Bit.LOW;
+        if(b1 == Signal.LOW || b2 == Signal.LOW) {
+            return Signal.LOW;
         }
 
-        if(b1 == Bit.HIGH && b2 == Bit.HIGH) {
-            return Bit.HIGH;
+        if(b1 == Signal.HIGH && b2 == Signal.HIGH) {
+            return Signal.HIGH;
         }
 
-        return Bit.UNKNOWN;
+        return Signal.UNKNOWN;
 
     }
     

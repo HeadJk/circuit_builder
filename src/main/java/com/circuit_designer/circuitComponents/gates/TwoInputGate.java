@@ -1,6 +1,8 @@
 package com.circuit_designer.circuitComponents.gates;
 
-import com.circuit_designer.circuitStructure.Bit;
+import com.circuit_designer.circuitStructure.Signal;
+
+// TODO Unit test.
 
 public abstract class TwoInputGate extends Gate {
 
@@ -12,11 +14,13 @@ public abstract class TwoInputGate extends Gate {
     }
     
     @Override
-    protected void computeSignal() {
-        Bit b1 = this.getInputBus(0).getSignal();
-        Bit b2 = this.getInputBus(1).getSignal();
-        Bit nextOutput = this.bitComparator.compare(b1, b2);
-        this.getOutputBus(0).setSignal(nextOutput);
+    protected void transferSignalToOutputs() {
+        Signal s0 = this.getInputSignal(0);
+        Signal s1 = this.getInputSignal(1);
+        Signal nextOutput = this.bitComparator.compare(s0, s1);
+        if(hasAllOutputPortsConnected()) {
+            this.getOutputBus(0).setSignal(nextOutput);
+        }
     }
 
 }
