@@ -1,6 +1,9 @@
 package com.circuit_designer.circuitStructure;
 
 import org.junit.jupiter.api.Test;
+
+import com.circuit_designer.circuitStructure.busStructure.Bus;
+
 import org.junit.jupiter.api.Assertions;
 
 public class BusTest {

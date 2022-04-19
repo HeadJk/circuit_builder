@@ -1,7 +1,7 @@
 package com.circuit_designer.cirucitFactory;
 
-import com.circuit_designer.circuitStructure.BusInterface;
 import com.circuit_designer.circuitStructure.DeviceI;
+import com.circuit_designer.circuitStructure.busStructure.BusInterface;
 
 public abstract class DeviceFactory implements DeviceFactoryI {
     

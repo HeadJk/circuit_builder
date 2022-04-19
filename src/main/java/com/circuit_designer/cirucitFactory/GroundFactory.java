@@ -1,6 +1,6 @@
 package com.circuit_designer.cirucitFactory;
 
-import com.circuit_designer.circuitComponents.constants.Ground;
+import com.circuit_designer.circuitDevices.constants.Ground;
 
 public class GroundFactory extends DeviceFactory {
 

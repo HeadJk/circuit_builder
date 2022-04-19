@@ -1,14 +1,11 @@
-package com.circuit_designer.circuitStructure;
+package com.circuit_designer.circuitStructure.deviceStructure;
 
 import com.circuit_designer.circuitStructure.busStructure.BusInterface;
+import com.circuit_designer.utilities.ArrayNullFinderI;
 
-public interface DeviceI {
+public interface PortManagerI extends SignalObserver {
 
-    public void transferSignalToOutputs();
-
-    public Signal getInputSignal(int portIndex);
-
-    public Signal getOutputSignal(int portIndex);
+    public void updateOutputs();
 
     public BusInterface getInputBus(int portIndex);
 
@@ -27,8 +24,6 @@ public interface DeviceI {
     public int getInputPortCount();
 
     public int getOutputPortCount();
-    
-    public String getName();
 
     public int getNextAvailableOutputPort();
 
@@ -38,7 +33,12 @@ public interface DeviceI {
 
     public boolean hasAllOutputPortsConnected();
 
-    @Override
-    public String toString();
+    public BusInterface[] getInputPorts();
 
+    public BusInterface[] getOutputPorts();
+
+    public ArrayNullFinderI getInputPortAvailability();
+
+    public ArrayNullFinderI getOutputPortAvailability();
+    
 }

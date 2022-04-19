@@ -1,6 +1,6 @@
 package com.circuit_designer.cirucitFactory;
 
-import com.circuit_designer.circuitStructure.Bus;
+import com.circuit_designer.circuitStructure.busStructure.Bus;
 
 public class BusFactory {
     

@@ -2,6 +2,7 @@ package com.circuit_designer.circuitStructure;
 
 import org.junit.jupiter.api.Test;
 
+import com.circuit_designer.circuitStructure.busStructure.Bus;
 import com.circuit_designer.cirucitFactory.*;
 
 import org.junit.jupiter.api.Assertions;

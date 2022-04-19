@@ -1,28 +1,26 @@
 package com.circuit_designer.circuitStructure;
 
-import com.circuit_designer.utilities.ArrayNullFinder;
-import com.circuit_designer.utilities.ArrayNullFinderI;
+import com.circuit_designer.circuitStructure.busStructure.BusInterface;
+import com.circuit_designer.circuitStructure.deviceStructure.PortManager;
+import com.circuit_designer.circuitStructure.deviceStructure.PortManagerI;
 
 // TODO Unit test.
 
 public abstract class Device implements DeviceI {
 
     private String name;
-    private PortConnectorI portConnector = new PortConnector();
-    private BusInterface[] outputPorts;
-    private BusInterface[] inputPorts;
-    private ArrayNullFinderI inputPortAvailability;
-    private ArrayNullFinderI outputPortAvailability;
+    private PortManagerI portManager;
 
     public Device(int inputPortCount, int outputPortCount, String name) {
-        this.inputPorts = new BusInterface[inputPortCount];
-        this.outputPorts = new BusInterface[outputPortCount];
         this.name = name;
-        this.inputPortAvailability = new ArrayNullFinder(this.inputPorts);
-        this.outputPortAvailability = new ArrayNullFinder(this.outputPorts);
+        this.portManager = new PortManager(this, inputPortCount, outputPortCount);
     }
 
-    protected abstract void transferSignalToOutputs();
+    public abstract void transferSignalToOutputs();
+
+    public PortManagerI getPortManager() {
+        return portManager;
+    }
 
     @Override
     public String getName() {
@@ -30,95 +28,80 @@ public abstract class Device implements DeviceI {
     }
 
     @Override
-    public void updateOutputs() {
-        transferSignalToOutputs();
-    }
-
-    @Override
     public Signal getInputSignal(int portIndex) {
-        assert (0 <= portIndex && portIndex < inputPorts.length);
-        BusInterface bus = getInputBus(portIndex);
+        BusInterface bus = getPortManager().getInputBus(portIndex);
         return bus != null ? bus.getSignal() : Signal.UNKNOWN;
     }
 
     @Override
     public Signal getOutputSignal(int portIndex) {
-        assert (0 <= portIndex && portIndex < outputPorts.length);
-        BusInterface bus = getOutputBus(portIndex);
+        BusInterface bus = getPortManager().getOutputBus(portIndex);
         return bus != null ? bus.getSignal() : Signal.UNKNOWN;
     }
 
     @Override
     public BusInterface getInputBus(int portIndex) {
-        assert (0 <= portIndex && portIndex < inputPorts.length);
-        return this.inputPorts[portIndex];
+        return getPortManager().getInputBus(portIndex);
     }
 
     @Override
     public BusInterface getOutputBus(int portIndex) {
-        assert (0 <= portIndex && portIndex < outputPorts.length);
-        return this.outputPorts[portIndex];
+        return getPortManager().getOutputBus(portIndex);
     }
 
     @Override
     public boolean connectOutputBus(int portIndex, BusInterface bus) {
-        return portConnector.connectOutPortBus(bus, this, portIndex);
+        return getPortManager().connectOutputBus(portIndex, bus);
     }
 
     @Override
     public boolean disconnectOutputBus(int portIndex) {
-        return portConnector.disconnectOutPortBus(this, portIndex);
+        return getPortManager().disconnectOutputBus(portIndex);
     }
 
     @Override
     public boolean connectInputBus(int portIndex, BusInterface bus) {
-        return portConnector.connectInPortBus(bus, this, portIndex);
+        return getPortManager().connectInputBus(portIndex, bus);
     }
 
     @Override
     public boolean disconnectInputBus(int portIndex) {
-        return portConnector.disconnectInPortBus(this, portIndex);
+        return getPortManager().disconnectInputBus(portIndex);
     }
 
     @Override
     public void disconnectAllPorts() {
-        portConnector.disconnectAllPorts(this);
+        getPortManager().disconnectAllPorts();
     }
 
     @Override
     public int getInputPortCount() {
-        return this.inputPorts.length;
+        return getPortManager().getInputPortCount();
     }
 
     @Override
     public int getOutputPortCount() {
-        return this.outputPorts.length;
+        return getPortManager().getOutputPortCount();
     }
 
     @Override
     public int getNextAvailableInputPort() {
-        return this.inputPortAvailability.getNextNullElementIndex();
+        return getPortManager().getNextAvailableInputPort();
     }
 
     @Override
     public int getNextAvailableOutputPort() {
-        return this.outputPortAvailability.getNextNullElementIndex();
+        return getPortManager().getNextAvailableOutputPort();
     }
 
     @Override
     public boolean hasAllInputPortsConnected() {
-        return this.inputPortAvailability.getNextNullElementIndex() == -1;
+        return getPortManager().hasAllInputPortsConnected();
     }
 
     @Override
     public boolean hasAllOutputPortsConnected() {
-        return this.outputPortAvailability.getNextNullElementIndex() == -1;
+        return getPortManager().hasAllOutputPortsConnected();
     }
-
-    // Get rid of after refactor
-    public BusInterface[] getOutputPorts() { return outputPorts; }
-    public BusInterface[] getInputPorts() { return inputPorts; }
-    public ArrayNullFinderI getInputPortAvailability() { return inputPortAvailability;}
-    public ArrayNullFinderI getOutputPortAvailability() { return outputPortAvailability; }
     
 }
