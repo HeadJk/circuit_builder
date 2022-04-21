@@ -16,7 +16,11 @@ public class DeviceConnector implements DeviceConnectorI {
         BusFactory busFactory = new BusFactory();
         BusInterface bus = busFactory.makeBus();
 
-        inputComp.connectOutputBus(inputCompPort, bus);
+        if(inputComp.getOutputBus(inputCompPort) == null) {
+            inputComp.connectOutputBus(inputCompPort, bus);
+        } else {
+            bus = inputComp.getOutputBus(inputCompPort);
+        }
 
         boolean c2 = outputComp.connectInputBus(outputCompPort, bus);
 

@@ -7,7 +7,7 @@ import com.circuit_designer.circuitDevices.SingleOutputDevice;
 public abstract class Gate extends SingleOutputDevice {
 
     public Gate(int inputPortCount, String name) {
-        super(inputPortCount, 1, name);
+        super(inputPortCount, name);
     }
     
 }

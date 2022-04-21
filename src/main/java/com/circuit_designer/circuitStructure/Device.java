@@ -22,6 +22,13 @@ public abstract class Device implements DeviceI {
         return portManager;
     }
 
+    public boolean setOutputSignal(int portIndex, Signal s) {
+        BusInterface bus = getPortManager().getOutputBus(portIndex);
+        if(bus != null) bus.setSignal(s);
+        else return false;
+        return true;
+    }
+
     @Override
     public String getName() {
         return this.name;

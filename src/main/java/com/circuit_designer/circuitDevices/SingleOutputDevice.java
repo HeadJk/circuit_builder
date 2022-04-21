@@ -6,8 +6,8 @@ import com.circuit_designer.circuitStructure.Device;
 
 public abstract class SingleOutputDevice extends Device {
 
-    public SingleOutputDevice(int inputPortCount, int outputPortCount, String name) {
-        super(inputPortCount, outputPortCount, name);
+    public SingleOutputDevice(int inputPortCount, String name) {
+        super(inputPortCount, 1, name);
     }
     
 }

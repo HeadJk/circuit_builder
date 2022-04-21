@@ -10,13 +10,13 @@ public abstract class Constant extends SingleOutputDevice {
     private Signal constantSignal;
 
     public Constant(Signal constantSignal, String name) {
-        super(0, 1, name);
+        super(0, name);
         this.constantSignal = constantSignal;
     }
 
     @Override
     public void transferSignalToOutputs() {
-        this.getOutputBus(0).setSignal(this.constantSignal);
+        this.setOutputSignal(0, this.constantSignal);
     }
     
 }
