@@ -12,26 +12,45 @@ public class DeviceConnector implements DeviceConnectorI {
     public void connectComponents(
         DeviceI inputComp, int inputCompPort, 
         DeviceI outputComp,int outputCompPort
-    ) {
+    ) throws Exception {
         BusFactory busFactory = new BusFactory();
         BusInterface bus = busFactory.makeBus();
 
-        boolean c1 = inputComp.connectOutputBus(inputCompPort, bus);
+        inputComp.connectOutputBus(inputCompPort, bus);
+
         boolean c2 = outputComp.connectInputBus(outputCompPort, bus);
 
-        if(!c1 || !c2) {
-            System.out.println("Error connecting component " + inputComp.getName() + " to " + outputComp.getName());
+        if(!c2) throw new Exception(
+            "Error encountered when connecting devices.\n" + inputComp.getName() + "->" + outputComp.getName()
+        );
+    }
+
+    @Override
+    public void connectComponents(DeviceI inputComp, DeviceI outputComp) throws Exception {
+        try {
+            connectComponents(
+                inputComp, 
+                0,
+                outputComp, 
+                outputComp.getNextAvailableInputPort()
+            );
+        } catch(Exception ex) {
+            throw ex;
         }
     }
 
     @Override
-    public void connectComponents(DeviceI inputComp, DeviceI outputComp) {
-        connectComponents(
-            inputComp, 
-            inputComp.getNextAvailableOutputPort(),
-            outputComp, 
-            outputComp.getNextAvailableInputPort()
-        );
+    public void connectComponents(DeviceI inputComp, int inputCompPort, DeviceI outputComp) throws Exception {
+        try {
+            connectComponents(
+                inputComp, 
+                inputCompPort,
+                outputComp, 
+                outputComp.getNextAvailableInputPort()
+            );
+        } catch(Exception ex) {
+            throw ex;
+        }
     }
     
 }

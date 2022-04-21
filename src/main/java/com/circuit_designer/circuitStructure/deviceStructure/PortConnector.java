@@ -1,6 +1,5 @@
 package com.circuit_designer.circuitStructure.deviceStructure;
 
-import com.circuit_designer.circuitStructure.DeviceI;
 import com.circuit_designer.circuitStructure.busStructure.BusInterface;
 
 // TODO Test
@@ -19,7 +18,7 @@ public class PortConnector implements PortConnectorI {
 
     @Override
     public boolean connectInPortBus(BusInterface bus, int deviceInPort) {
-        assert (0 <= deviceInPort && deviceInPort < getPortManager().getInputPorts().length);
+        if(0 <= deviceInPort && deviceInPort < getPortManager().getInputPorts().length) return false;
         if(getPortManager().getInputPorts()[deviceInPort] != null) return false;
 
         getPortManager().getInputPorts()[deviceInPort] = bus; 
@@ -31,7 +30,7 @@ public class PortConnector implements PortConnectorI {
 
     @Override
     public boolean connectOutPortBus(BusInterface bus, int deviceOutPort) {
-        assert (0 <= deviceOutPort && deviceOutPort < getPortManager().getOutputPorts().length);
+        if(0 <= deviceOutPort && deviceOutPort < getPortManager().getOutputPorts().length) return false;
         if(getPortManager().getOutputPorts()[deviceOutPort] != null) return false;
 
         if(bus.isAvailableInput()) {
@@ -48,7 +47,7 @@ public class PortConnector implements PortConnectorI {
 
     @Override
     public boolean disconnectInPortBus(int deviceInPort) {
-        assert (0 <= deviceInPort && deviceInPort < getPortManager().getInputPorts().length);
+        if(0 <= deviceInPort && deviceInPort < getPortManager().getInputPorts().length) return false;
         if(getPortManager().getInputPorts()[deviceInPort] == null) return false;
 
         getPortManager().getInputPorts()[deviceInPort].detatchObserver(getPortManager());
@@ -60,7 +59,7 @@ public class PortConnector implements PortConnectorI {
 
     @Override
     public boolean disconnectOutPortBus(int deviceOutPort) {
-        assert (0 <= deviceOutPort && deviceOutPort < getPortManager().getOutputPorts().length);
+        if(0 <= deviceOutPort && deviceOutPort < getPortManager().getOutputPorts().length) return false;
         if(getPortManager().getOutputPorts()[deviceOutPort] == null) return false;
         getPortManager().getOutputPorts()[deviceOutPort].unlockInputConnection();
         getPortManager().getOutputPorts()[deviceOutPort] = null;

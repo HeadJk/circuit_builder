@@ -1,6 +1,5 @@
 package com.circuit_designer.circuitStructure.deviceStructure;
 
-import com.circuit_designer.circuitStructure.DeviceI;
 import com.circuit_designer.circuitStructure.busStructure.BusInterface;
 
 public interface PortConnectorI {

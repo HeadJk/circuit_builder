@@ -7,8 +7,14 @@ public interface DeviceConnectorI {
     public void connectComponents(
         DeviceI inputComp, int inputCompPort,
         DeviceI outputComp, int outputCompPort
-    );
+    ) throws Exception;
 
-    public void connectComponents(DeviceI inputComp, DeviceI outputComp);
+    public void connectComponents(DeviceI inputComp, DeviceI outputComp) throws Exception;
+
+    public void connectComponents(
+        DeviceI inputComp,
+        int inputCompPort,
+        DeviceI outputComp
+    ) throws Exception;
 
 }
