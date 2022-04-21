@@ -4,9 +4,9 @@ import com.circuit_designer.circuitStructure.Device;
 
 // TODO Unit test.
 
-public abstract class UnaryOutputDevice extends Device {
+public abstract class SingleOutputDevice extends Device {
 
-    public UnaryOutputDevice(int inputPortCount, int outputPortCount, String name) {
+    public SingleOutputDevice(int inputPortCount, int outputPortCount, String name) {
         super(inputPortCount, outputPortCount, name);
     }
     

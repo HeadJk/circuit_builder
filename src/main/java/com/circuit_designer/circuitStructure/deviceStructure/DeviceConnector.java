@@ -13,20 +13,14 @@ public class DeviceConnector implements DeviceConnectorI {
         DeviceI inputComp, int inputCompPort, 
         DeviceI outputComp,int outputCompPort
     ) {
-        BusInterface bus;
+        BusFactory busFactory = new BusFactory();
+        BusInterface bus = busFactory.makeBus();
 
-        if(inputComp.getOutputBus(inputCompPort) == null) {
-            BusFactory busFactory = new BusFactory();
-            bus = busFactory.makeBus();
-            inputComp.connectOutputBus(inputCompPort, bus);
-        } else {
-            bus = inputComp.getInputBus(inputCompPort);
-        }
-        
-        try {
-            tryConnecting(outputComp, outputCompPort, bus);
-        } catch(Exception ex) {
-            throw ex;
+        boolean c1 = inputComp.connectOutputBus(inputCompPort, bus);
+        boolean c2 = outputComp.connectInputBus(outputCompPort, bus);
+
+        if(!c1 || !c2) {
+            System.out.println("Error connecting component " + inputComp.getName() + " to " + outputComp.getName());
         }
     }
 
@@ -38,11 +32,6 @@ public class DeviceConnector implements DeviceConnectorI {
             outputComp, 
             outputComp.getNextAvailableInputPort()
         );
-    }
-
-    private void tryConnecting(DeviceI outputComp, int outputCompPort, BusInterface inputBus) {
-        boolean succesfulConnection = outputComp.connectInputBus(outputCompPort, inputBus);
-        if(!succesfulConnection) System.out.println("Component Connection Error.");
     }
     
 }

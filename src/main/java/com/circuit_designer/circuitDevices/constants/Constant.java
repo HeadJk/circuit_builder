@@ -1,11 +1,11 @@
 package com.circuit_designer.circuitDevices.constants;
 
-import com.circuit_designer.circuitDevices.UnaryOutputDevice;
+import com.circuit_designer.circuitDevices.SingleOutputDevice;
 import com.circuit_designer.circuitStructure.Signal;
 
 // TODO Unit test.
 
-public abstract class Constant extends UnaryOutputDevice {
+public abstract class Constant extends SingleOutputDevice {
 
     private Signal constantSignal;
 
